@@ -14,7 +14,7 @@ export const Banner: FC<Props> = ({ buttonText, handleOnClick }) => {
         <span className={styles.title2}>Connoisseur</span>
       </h1>
       <p className={styles.subTitle}>Discover your local coffee shops!</p>
-      <div className="buttonWrapper">
+      <div className={styles.buttonWrapper}>
         <button className={styles.button} onClick={handleOnClick}>
           {buttonText}
         </button>
