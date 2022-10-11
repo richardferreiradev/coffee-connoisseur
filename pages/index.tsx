@@ -1,10 +1,22 @@
-import type { NextPage } from 'next';
+import type { GetStaticProps, NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { Banner } from '../components/Banner';
-import styles from '../styles/Home.module.css';
+import styles from '@styles/Home.module.css';
 
-const Home: NextPage = () => {
+import { Card } from '@components/Card';
+import { Banner } from '@components/Banner';
+
+import coffeeStores from '../data/coffee-stores.json';
+
+export const getStaticProps: GetStaticProps = async (context) => {
+  return {
+    props: {
+      coffeeStores,
+    },
+  };
+};
+
+const Home: NextPage = ({ coffeeStores }: any) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -25,6 +37,19 @@ const Home: NextPage = () => {
             width={700}
             height={400}
           />
+        </div>
+        <div className={styles.cardLayout}>
+          {coffeeStores.map((store: any) => {
+            return (
+              <Card
+                key={store.id}
+                href={`/coffee-store/${store.id}`}
+                title={store.name}
+                className={styles.card}
+                imgUrl={store.imgUrl}
+              />
+            );
+          })}
         </div>
       </main>
     </div>
