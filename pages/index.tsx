@@ -6,12 +6,12 @@ import styles from '@styles/Home.module.css';
 import { Card } from '@components/Card';
 import { Banner } from '@components/Banner';
 
-import coffeeStores from '../data/coffee-stores.json';
+import coffeeStoresData from '../data/coffee-stores.json';
 
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: {
-      coffeeStores,
+      coffeeStores: coffeeStoresData,
     },
   };
 };
@@ -38,19 +38,25 @@ const Home: NextPage = ({ coffeeStores }: any) => {
             height={400}
           />
         </div>
-        <div className={styles.cardLayout}>
-          {coffeeStores.map((store: any) => {
-            return (
-              <Card
-                key={store.id}
-                href={`/coffee-store/${store.id}`}
-                title={store.name}
-                className={styles.card}
-                imgUrl={store.imgUrl}
-              />
-            );
-          })}
-        </div>
+
+        {coffeeStores.length > 0 && (
+          <>
+            <h2 className={styles.heading2}>Toronto Coffee Bars</h2>
+            <div className={styles.cardLayout}>
+              {coffeeStores.map((store: any) => {
+                return (
+                  <Card
+                    key={store.id}
+                    href={`/coffee-store/${store.id}`}
+                    title={store.name}
+                    className={styles.card}
+                    imgUrl={store.imgUrl}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </main>
     </div>
   );
